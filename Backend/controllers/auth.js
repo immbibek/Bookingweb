@@ -35,9 +35,16 @@ export const login=async (req,req,next)=>{
 
         if(!isPasswordCorrect) return next(createError(400,"Wrong password or username"))
 
+
+        const token=jwt.sign({id:user._id,isAdmin:user.isAdmin},process.env.JWT)
+
        const {password,isAdmin,...otherDetalis}=user._doc;
 
-        res.status(200).json(...otherDetalis)
+        res
+        .cookie("access_token",token,{
+            httpOnly:true,
+        })
+        .status(200).json(...otherDetalis)
     } catch (err) {
         next(err)
         
