@@ -18,6 +18,8 @@ router.delete("/:id",verifyAdmin,deleteHotel)
 router.get("/:id",getHotel)
 // GETALL 
 router.get("/:id",getHotels)
+router.get("countByCity",getHotels)
+router.get("countByType",getHotels)
 
 
 
